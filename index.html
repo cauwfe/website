@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>@cauwfe.com</title>
+<title>cauwfe</title>
 <meta name="description" content="cauwfe — a quiet pond on the internet">
 <meta name="theme-color" content="#ebe7dd">
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
@@ -26,6 +26,7 @@
     color-scheme: light;
   }
   * { box-sizing: border-box; }
+  .switching, .switching *, .switching *::before, .switching *::after { transition: none !important; }
   html, body { margin: 0; height: 100%; }
   body {
     background: var(--bg);
@@ -158,6 +159,9 @@
   }
   themeBtn.addEventListener('click', () => {
     theme = theme === 'dark' ? 'light' : 'dark';
+    // freeze every transition for the switch so the page, text and blur panels all change on the same frame
+    root.classList.add('switching');
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('switching')));
     applyTheme();
   });
   applyTheme();
