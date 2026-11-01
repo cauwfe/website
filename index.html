@@ -6,7 +6,10 @@
 <title>cauwfe</title>
 <meta name="description" content="cauwfe — a quiet pond on the internet">
 <meta name="theme-color" content="#ebe7dd">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23161413'/%3E%3Crect x='6' y='10' width='6' height='6' fill='%23d9661f'/%3E%3Crect x='12' y='10' width='6' height='6' fill='%23a39e95'/%3E%3Crect x='18' y='10' width='6' height='6' fill='%23d9661f'/%3E%3Crect x='12' y='16' width='6' height='6' fill='%23a39e95'/%3E%3C/svg%3E">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root {
     --bg: #1a1917;
@@ -27,9 +30,8 @@
   body {
     background: var(--bg);
     color: var(--fg);
-    font: 14px/1.7 ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font: 14.5px/1.7 "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
     overflow: hidden;
-    transition: background .4s, color .4s;
     -webkit-font-smoothing: antialiased;
   }
   #pond { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
@@ -65,7 +67,7 @@
   main > * { pointer-events: auto; position: relative; }
   /* a plain background-coloured overlay behind each text element: big panel, short fall-off (normal blending) */
   main > *::before, nav::before, #stats::before {
-    --fx: 64px; --fy: 26px;                      /* fall-off distance: sides / top+bottom */
+    --fx: 120px; --fy: 48px;                      /* fall-off distance: sides / top+bottom */
     content: ""; position: absolute; z-index: -1; pointer-events: none;
     background: color-mix(in srgb, var(--bg) 86%, transparent);
     -webkit-mask-image:
@@ -81,9 +83,9 @@
                       #000 calc(100% - var(--fy)), rgba(0,0,0,.5) calc(100% - var(--fy) * .6), rgba(0,0,0,.12) calc(100% - var(--fy) * .3), transparent 100%);
             mask-composite: intersect;
   }
-  main > *::before { inset: -34px -96px; }
-  nav::before      { --fx: 56px; --fy: 24px; inset: -40px -100px; }
-  #stats::before   { --fx: 44px; --fy: 20px; inset: -32px -64px; }
+  main > *::before { inset: -64px -170px; }
+  nav::before      { --fx: 90px; --fy: 40px; inset: -60px -150px; }
+  #stats::before   { --fx: 70px; --fy: 34px; inset: -50px -110px; }
   blockquote {
     margin: 0 0 2.6em; color: var(--dim);
   }
@@ -180,7 +182,7 @@
   const ctx = cv.getContext('2d');
   const nFishEl = document.getElementById('nFish');
   const nFedEl = document.getElementById('nFed');
-  const FONT = 'ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace';
+  const FONT = '"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace';
   let W = 0, H = 0, dpr = 1, CS = 14, cols = 0, rows = 0;
  
   function resize() {
@@ -557,7 +559,7 @@
         continue;
       }
       if (c.eye) {                                   // eyes: just the glyph, no box behind it
-        ctx.font = `bold ${Math.round(CS * 0.95)}px ${FONT}`;
+        ctx.font = `${Math.round(CS * 0.9)}px ${FONT}`;
         ctx.fillStyle = theme === 'dark' ? 'rgba(244,238,226,0.95)' : 'rgba(34,20,10,0.95)';
         ctx.fillText('o', x + CS / 2, y + CS / 2 + 1);
         ctx.font = `${Math.round(CS * 0.78)}px ${FONT}`;
