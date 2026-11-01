@@ -482,7 +482,8 @@
   /* ---------- draw ---------- */
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-
+  ctx.translate(0, 0);
+  
   let last = performance.now();
   let rainT = 2;
   let T = 0;                                   // seconds since load (drives scale shimmer)
